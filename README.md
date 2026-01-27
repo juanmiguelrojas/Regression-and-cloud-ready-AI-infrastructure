@@ -37,15 +37,16 @@ Como parte del enfoque de Arquitectura Empresarial, la validación final se real
 ### Evidencias de Ejecución:
 
 #### A. Entorno de Trabajo en SageMaker
-![SageMaker Dashboard](https://via.placeholder.com/800x400?text=Captura+1:+Panel+de+SageMaker+con+archivos+visibles)
+![SageMaker Dashboard](images/1.png)
 *Aquí debe aparecer la captura de pantalla de tu instancia de SageMaker con los archivos .ipynb abiertos.*
 
 #### B. Visualización de Superficie de Costo y Convergencia
-![Graficos de Entrenamiento](https://via.placeholder.com/800x400?text=Captura+2:+Grafico+3D+de+costo+o+curva+de+perdida)
+![Graficos de Entrenamiento](images/2.png)
+![Graficos de Entrenamiento](images/3.png)
 *Captura de los plots generados dentro de SageMaker (ej. la superficie 3D del Notebook 1).*
 
 #### C. Inferencia de Resultados
-![Output de Inferencia](https://via.placeholder.com/800x400?text=Captura+3:+Prediccion+final+para+M=1.3)
+![Output de Inferencia](images/4.png)
 *Captura de la celda de predicción final donde el modelo calcula la luminosidad para una nueva estrella.*
 
 ---
