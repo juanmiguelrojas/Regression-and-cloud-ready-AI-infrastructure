@@ -1,0 +1,234 @@
+================================================================================
+          AUTOMATIC COPILOT EVALUATION — TA GRADING REPORT
+          Course: Digital Transformation and Enterprise Architecture
+          Assignment: Stellar Luminosity — Linear & Polynomial Regression
+================================================================================
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+This submission demonstrates a solid, technically complete implementation of
+both linear and polynomial regression from first principles using only NumPy
+and Matplotlib. The student correctly implements gradient descent in both loop
+and vectorized forms, constructs a design matrix for multi-feature polynomial
+regression, and addresses all mandatory components (cost surface, convergence
+plot, learning-rate experiments, model comparison, interaction analysis, and
+inference). The cloud execution is documented in the README with screenshots
+and a local-vs-cloud comparison. Conceptual understanding is expressed in the
+markdown cells, though some explanations are brief. Minor deductions stem from
+thin post-convergence analysis and a very short explanation of the cost-surface
+geometry.
+
+--------------------------------------------------------------------------------
+GRADING BREAKDOWN (0.0 – 5.0 scale)
+--------------------------------------------------------------------------------
+
+1. Repository Structure & Compliance ........... 0.50 / 0.50
+   - README.md present: YES
+   - Two notebooks (Part I and Part II): YES
+     * 01_part1_linreg_1feature.ipynb
+     * 02_part2_polyreg.ipynb
+   - Datasets hard-coded inside notebooks: YES (NumPy arrays in Cell 1 of each)
+   - Only allowed libraries (Python, NumPy, Matplotlib): YES
+   - Deductions: None. Full marks.
+
+2. Notebook 1 – Linear Regression ............. 1.75 / 2.00
+   Items evaluated:
+   [✓] Dataset visualization: scatter plot present; non-linearity noted.
+   [✓] Hypothesis f(M)=wM+b and MSE function: correctly implemented.
+   [✓] Cost surface [MANDATORY]: 3D grid computed over (w,b) space and
+       plotted. Brief explanation given ("plano con curvatura con un mínimo
+       absoluto visible").
+   [✓] Gradient derivation: dJ/dw and dJ/db both correct mathematically in
+       loop and vectorized forms.
+   [✓] Non-vectorized gradient descent: explicit for-loop implementation.
+   [✓] Vectorized gradient descent: np.dot-based implementation.
+   [✓] Convergence plot [MANDATORY]: plotted for all three learning rates on
+       the same axes.
+   [✓] Multiple learning-rate experiments [MANDATORY]: lr = 0.01, 0.05, 0.1
+       (exactly 3; requirement met).
+   [✓] Final fit plot: scatter + regression line with annotated parameters.
+   [✓] Conceptual understanding of w: explained as luminosity increase rate
+       per solar mass unit.
+   [✓] Limits of linearity: correctly attributed to the underlying power-law
+       relationship L ∝ M^k.
+   Deductions (-0.25):
+   - The convergence plot is generated but the accompanying markdown
+     discussion of *why* different learning rates behave differently (e.g.,
+     which rate causes overshooting, which is too slow) is absent. Only a
+     label ("Curva de Convergencia") is provided.
+   - The cost-surface explanation is a single sentence rather than a
+     substantive discussion of convexity and its optimization implications.
+
+3. Notebook 2 – Polynomial Regression ......... 1.80 / 2.00
+   Items evaluated:
+   [✓] Visualization with temperature encoding: scatter plot using the 'magma'
+       colormap to encode T; colorbar labeled correctly.
+   [✓] Feature engineering [M, T, M², M·T]: build_X() correctly constructs
+       all four columns for model M3.
+   [✓] Vectorized loss and gradients: compute_cost_multi() and
+       compute_gradient_multi() using np.dot and np.dot(X.T, errors).
+   [✓] Training and convergence plot: history logged; log-scale plot shown.
+   [✓] M1/M2/M3 model comparison [MANDATORY]: all three models trained,
+       final loss printed, and fitted predictions plotted per model.
+   [✓] Interaction cost analysis — w_MT sweep [MANDATORY]: w_MT varied from
+       50% to 150% of the trained value; cost curve plotted with optimal
+       vertical line.
+   [✓] Inference example [MANDATORY]: prediction for M=1.3, T=6600 produced
+       and interpreted in the context of the business conclusion.
+   Deductions (-0.20):
+   - The M1/M2/M3 comparison reports numeric final loss values but does not
+     include explicit analysis of which features drive the improvement or a
+     comparative summary (e.g., a table or commentary interpreting the
+     magnitudes of MSE reduction).
+   - The chosen learning rate (1e-9 for M3) is very conservative; although
+     justified in the markdown ("a learning rate muy pequeño para garantizar
+     estabilidad"), the model's convergence to a truly optimal solution is
+     difficult to verify, and no residual analysis or final MSE comparison
+     across models is discussed in prose.
+
+4. Cloud Execution Evidence (SageMaker) ........ 0.45 / 0.50
+   [✓] Description of SageMaker execution process: steps provided
+       (provisioning ml.t3.medium instance, uploading notebooks, executing).
+   [✓] Screenshot 1 (images/1.png): described as SageMaker dashboard with
+       notebooks open.
+   [✓] Screenshots 2–3 (images/2.png, images/3.png): described as plots
+       generated inside SageMaker.
+   [✓] Screenshot 4 (images/4.png): described as inference output cell.
+   [✓] Local vs. cloud comparison table: present with three attributes
+       (Consistency, Scalability, Governance).
+   Deductions (-0.05):
+   - The README image captions include placeholder-style text ("Aquí debe
+     aparecer..."), suggesting the screenshots may not have been verified
+     after insertion; this is a minor cosmetic issue.
+
+--------------------------------------------------------------------------------
+FINAL GRADE
+--------------------------------------------------------------------------------
+  Repository structure & compliance  : 0.50 / 0.50
+  Notebook 1 – Linear regression    : 1.75 / 2.00
+  Notebook 2 – Polynomial regression: 1.80 / 2.00
+  Cloud execution evidence           : 0.45 / 0.50
+  ─────────────────────────────────────────────────
+  Final grade: 4.5 / 5.0
+
+  Status: PASS (≥ 3.0)
+
+--------------------------------------------------------------------------------
+STRENGTHS
+--------------------------------------------------------------------------------
+• All mandatory components are present and functional: cost surface (3D),
+  convergence plot with ≥3 learning rates, M1/M2/M3 model comparison,
+  w_MT interaction sweep, and an inference example.
+• Correct mathematical implementation of gradient descent from scratch —
+  both the non-vectorized (explicit loop) and vectorized (np.dot) forms are
+  properly derived and cleanly coded.
+• Design matrix abstraction via build_X() is well-structured and easy to
+  extend to new model types.
+• Temperature-encoded scatter plot in Notebook 2 is an effective
+  visualization choice.
+• AWS SageMaker evidence is comprehensive: multi-step provisioning narrative,
+  4 annotated screenshots, and a comparative table with enterprise-relevant
+  attributes (scalability, governance, consistency).
+• Datasets are entirely self-contained within the notebooks — no external
+  file dependencies.
+• Use of log-scale on the convergence plot in Notebook 2 shows awareness of
+  numerical dynamics.
+
+--------------------------------------------------------------------------------
+ISSUES & MISSING ELEMENTS
+--------------------------------------------------------------------------------
+• No explicit written analysis of the convergence plot in Notebook 1: the
+  plot comparing lr=0.01/0.05/0.1 is generated but the student does not
+  explain which rate is best and why (e.g., lr=0.1 converges fastest without
+  diverging; lr=0.01 is too slow).
+• Cost surface discussion is minimal: one sentence confirming a visible
+  minimum is not sufficient for graduate-level analysis. A note on convexity
+  and why it guarantees a unique global minimum would strengthen the work.
+• The M1/M2/M3 model comparison lacks a synthesis: final losses are printed
+  but not compared in a table or discussed textually (e.g., "M3 reduces MSE
+  by X% versus M1").
+• README image captions contain placeholder text ("Aquí debe aparecer..."),
+  which suggests incomplete editing after screenshot insertion.
+• Notebook 2 does not normalize or standardize features despite T being on
+  a ~10,000x larger scale than M. Although the student acknowledges this,
+  using a compensatory tiny lr (1e-9) may prevent full convergence and
+  makes the choice of hyperparameters fragile.
+
+--------------------------------------------------------------------------------
+TA FEEDBACK TO STUDENT
+--------------------------------------------------------------------------------
+Your submission shows strong technical proficiency. The mathematical
+foundations are correctly implemented, and you have addressed every mandatory
+deliverable in both notebooks. To move from a very good submission to an
+excellent one, focus on the quality of your written analysis, not just the
+code.
+
+For Notebook 1: After generating the convergence plot, write 2–3 sentences
+explaining what you observe — which learning rate converges fastest, and why
+a rate that is too high could cause divergence. Similarly, expand the cost
+surface discussion: explain *why* the bowl shape guarantees gradient descent
+will find the global minimum.
+
+For Notebook 2: Add a brief comparison table for M1/M2/M3 showing final MSE
+values and summarize which features contribute most to the improvement.
+Consider normalizing T (e.g., dividing by 1000 or using z-score) so that
+you can use a more standard learning rate and verify convergence more
+rigorously.
+
+The SageMaker evidence is well-organized; just remove the placeholder text
+from the README image captions to clean it up.
+
+Overall, this is a solid, passing submission. Well done.
+
+================================================================================
+AI-GENERATION ASSESSMENT (NON-GRADING — INFORMATIVE ONLY)
+================================================================================
+
+A. Qualitative Assessment
+--------------------------
+Indicators consistent with AI-assisted generation:
+- Code style is highly uniform throughout both notebooks: identical variable
+  naming conventions, consistent comment density, textbook-clean function
+  signatures with docstrings of similar length.
+- Markdown explanations use polished enterprise/academic framing (e.g.,
+  "atributo de calidad de software de primer nivel", "Arquitectura de
+  Sistemas Inteligentes") in a tone that is very consistent and rarely
+  reflects personal confusion or iterative reasoning.
+- The structure of both notebooks follows the assignment specification almost
+  point-by-point, with no exploratory detours or experimentally motivated
+  digressions that typically appear in organically written student work.
+- Section numbering and heading style are uniform across both notebooks and
+  the README, which is unusual for work written at different times.
+
+Indicators of human involvement:
+- The choice of a very small learning rate (1e-9) in Notebook 2 and the
+  acknowledgment of the feature-scale problem reflect genuine engineering
+  judgment, even if the solution (compensatory small lr) is suboptimal.
+- Mixture of Spanish and English within individual sentences (e.g., "un
+  learning rate muy pequeño") is a natural code-switching pattern common in
+  bilingual technical writing.
+- The placeholder text remaining in the README image captions is a small but
+  characteristic sign of human oversight during editing.
+
+B. Quantitative Estimate
+-------------------------
+  Code             : ~65% AI-assisted
+  Explanations / markdown : ~70% AI-assisted
+  README           : ~75% AI-assisted
+
+C. Commentary
+--------------
+The overall consistency of style, the close alignment with the assignment
+structure, and the polished bilingual prose suggest significant AI-tool
+involvement — most likely a code-generation assistant used to scaffold the
+implementations and refine the markdown explanations. At the same time, the
+presence of language-specific code-switching, a minor placeholder oversight,
+and a technically deliberate (if suboptimal) hyperparameter choice indicate
+meaningful human engagement with the material.
+
+This assessment is observational and does not imply misconduct.
+
+================================================================================
+END OF REPORT
+================================================================================
